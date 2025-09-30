@@ -1,19 +1,42 @@
 #include "main.h"
-#include "persistence.h"
 #include "manager.h"
 
-#include <iostream>
+Commands processCommand(const std::string& command){
+    if (command.empty()) return Commands::help;
 
+    auto cmd = commandMapping.find(command);
+    return cmd->second;
+}
 
 int main(){
+    manager::Manager man{};
+    std::string commandIn;
+    commandIn.reserve(4);
+    Commands commandOut;
+
+    while (true) // run until quit is pressed
+    {
+        std::getline(std::cin, commandIn);
+        commandOut = processCommand(commandIn);
+
+        switch (commandOut)
+        {
+        case Commands::help:
+            man.printHelp();
+            break;
+        case Commands::quit:
+            return 0;
+        
+        default:
+            man.printHelp();
+            break;
+        }
+    }    
 
     // read list from persist
-
-    // enum to parse inputs? list tasks, add task, mark as done
 
     // unordered set to manage tasks
 
     // write to a file for persistence
 
-    std::cout << persistence::FILENAME << "\n";
 }
