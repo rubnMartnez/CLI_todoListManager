@@ -11,7 +11,7 @@ enum Commands{
     quit
 };
 
-static std::multimap<std::string, Commands> commandMapping {
+static const std::map<std::string, Commands> commandMapping {
     {"help", Commands::help},
     {"h", Commands::help},
     {"list", Commands::list},
