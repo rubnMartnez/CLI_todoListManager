@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include <vector>
+#include <unordered_set>
 
 namespace manager {
 class Manager
@@ -17,13 +17,15 @@ private:
     exit, e      Exit the program
     quit, q      Exit the program
     )";
-    std::vector<std::string> mTasks{};
+    std::unordered_set<std::string> mTasks{};
 public:
     Manager();
     ~Manager();
 
     const void printHelp() const;
     const void listTasks() const;
+    const void addTask();
+    const void removeTask();
 };
 
 } // namespace manager

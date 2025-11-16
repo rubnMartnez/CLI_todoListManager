@@ -28,10 +28,10 @@ int main(){
             man.listTasks();
             break;
         case Commands::add:
-            //TODO add add functionality
+            man.addTask();
             break;
         case Commands::done:
-            //TODO add done functionality
+            man.removeTask();
             break;
         case Commands::quit:
             return 0;
@@ -44,8 +44,10 @@ int main(){
 
     // read list from persist
 
-    // unordered set to manage tasks
+    //// unordered set to manage tasks
 
     // write to a file for persistence
+
+    // optimize task creation and deletion
 
 }
