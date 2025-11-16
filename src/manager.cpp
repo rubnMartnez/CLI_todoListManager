@@ -6,6 +6,7 @@ namespace manager {
 Manager::Manager()
 {
     printHelp();
+    persistence::Persistence persist{};
 }
 
 Manager::~Manager()

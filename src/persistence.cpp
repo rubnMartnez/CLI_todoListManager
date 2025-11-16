@@ -2,6 +2,13 @@
 
 namespace persistence {
 
+Persistence::Persistence()
+{
+}
+
+Persistence::~Persistence()
+{
+}
 
 
 } // namespace persistence
