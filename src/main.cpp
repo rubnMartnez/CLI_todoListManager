@@ -24,6 +24,15 @@ int main(){
         case Commands::help:
             man.printHelp();
             break;
+        case Commands::list:
+            man.listTasks();
+            break;
+        case Commands::add:
+            //TODO add add functionality
+            break;
+        case Commands::done:
+            //TODO add done functionality
+            break;
         case Commands::quit:
             return 0;
         

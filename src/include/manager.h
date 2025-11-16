@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <vector>
 
 namespace manager {
 class Manager
@@ -16,11 +17,13 @@ private:
     exit, e      Exit the program
     quit, q      Exit the program
     )";
+    std::vector<std::string> mTasks{};
 public:
     Manager();
     ~Manager();
 
     const void printHelp() const;
+    const void listTasks() const;
 };
 
 } // namespace manager
