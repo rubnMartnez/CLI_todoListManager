@@ -1,37 +1,45 @@
 #include "manager.h"
-#include "persistence.h"
 
 namespace manager {
 
-Manager::Manager()
+Manager::Manager() : mNumOfTasks(0)
 {
     printHelp();
-    persistence::Persistence persist{};
 }
 
 Manager::~Manager()
 {
 }
 
-const void Manager::printHelp() const {
+void Manager::printHelp() const {
     std::cout << HELP_MESSAGE << std::endl;
 }
-const void Manager::listTasks() const {
+void Manager::listTasks() const {
+    std::cout << "List of current tasks: \n";
+
+    if (mTasks.empty()){
+        std::cout << "Empty \n";
+        return;
+    }
+
     for (auto task : mTasks){
         std::cout << task << std::endl;
     }
 }
-const void Manager::addTask(){
+void Manager::addTask(){
+    mNumOfTasks++;
     std::string task{};
     task.reserve(50);
+    std::cout << "Enter new task: ";
     std::getline(std::cin, task);
     mTasks.emplace(task);
 }
-const void Manager::removeTask(){
+void Manager::removeTask(){
     std::string task{};
     task.reserve(50);
     std::getline(std::cin, task);
     mTasks.erase(task);
+    mNumOfTasks--;
 }
 
 } // namespace manager
