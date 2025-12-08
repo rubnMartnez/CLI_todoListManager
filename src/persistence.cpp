@@ -1,48 +1,51 @@
 #include "persistence.h"
-#include <istream>
+#include <fstream>
 
 namespace persistence {
 
 Persistence::Persistence()
 {
-    mFileStream.open(FILENAME, std::ios::in | std::ios::out | std::ios::app);
 }
 
 Persistence::~Persistence()
 {
-    if (mFileStream.is_open())
-        mFileStream.close();
 }
 
 std::unordered_set<std::string> Persistence::loadTasks(){
-    if (!mFileStream.is_open()){
+    std::ifstream ifstr (FILENAME);
+    if (!ifstr.is_open()){
         std::cout << "There was a problem opening the tasks file, try loading the " << FILENAME << ".bak\n";
         return {};
     }
+
     std::unordered_set<std::string> tasks{};
     std::string line;
-    char* a;
     
-    while (getline(mFileStream, line))
+    while (getline(ifstr, line))
     {
         tasks.emplace(line);
     }
+    ifstr.close();
     return tasks;
 }
 
 void Persistence::saveTasks(const std::unordered_set<std::string>& tasks) {
-    fileOpeningFallback();
-        
-    for (auto task : tasks){
-        mFileStream << task << std::endl;
-    }
-}
+    std::ofstream ofstr (FILENAME);
+    // fallback in case default file couldn't be opened
+    if (!ofstr.is_open()){
+        std::cout << "There was a problem opening the tasks file, so they'll be saved to " << FILENAME << ".bak\n";
+        ofstr.open(FILENAME + ".bak");
 
-void Persistence::fileOpeningFallback(){
-    if (mFileStream.is_open()) return;
-    // open a different file in case the other one is blocked
-    mFileStream.open(FILENAME + ".bak", std::ios::in | std::ios::out | std::ios::app);
-    std::cout << "There was a problem opening the tasks file, so they'll be saved to " << FILENAME << ".bak\n";
+        if (!ofstr.is_open()){
+            std::cout << "There was a problem opening the tasks file .bak, so the tasks won't be saved\n";
+            return;
+        }
+    }
+    
+    for (auto task : tasks){
+        ofstr << task << std::endl;
+    }
+    ofstr.close();
 }
 
 } // namespace persistence

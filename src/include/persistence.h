@@ -12,9 +12,7 @@ class Persistence
 {
 private:
     const std::string FILENAME{"todoList.txt"};
-    std::fstream mFileStream{};
 
-    void fileOpeningFallback();
 public:
     Persistence();
     ~Persistence();
