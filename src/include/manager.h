@@ -1,8 +1,5 @@
 #pragma once
 
-#include <iostream>
-#include <unordered_set>
-
 #include "persistence.h"
 
 namespace manager {

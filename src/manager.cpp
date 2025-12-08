@@ -5,10 +5,13 @@ namespace manager {
 Manager::Manager() : mNumOfTasks(0)
 {
     printHelp();
+    mTasks = mPersist.loadTasks();
+    mNumOfTasks = mTasks.size();
 }
 
 Manager::~Manager()
 {
+    mPersist.saveTasks(mTasks);
 }
 
 void Manager::printHelp() const {
