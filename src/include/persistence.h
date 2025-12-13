@@ -3,10 +3,11 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <unordered_set>
+#include <map>
+
+using taskMap = std::map<u_int16_t, std::string>;
 
 namespace persistence {
-
     
 class Persistence
 {
@@ -16,8 +17,8 @@ private:
 public:
     Persistence();
     ~Persistence();
-    std::unordered_set<std::string> loadTasks();
-    void saveTasks(const std::unordered_set<std::string>& tasks); 
+    taskMap loadTasks();
+    void saveTasks(const taskMap& tasks); 
 };
 
 } // namespace persistence

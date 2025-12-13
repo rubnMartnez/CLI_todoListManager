@@ -26,7 +26,7 @@ void Manager::listTasks() const {
     }
 
     for (auto task : mTasks){
-        std::cout << task << std::endl;
+        std::cout << task.first << ": " << task.second << std::endl;
     }
 }
 void Manager::addTask(){
@@ -35,14 +35,16 @@ void Manager::addTask(){
     task.reserve(50);
     std::cout << "Enter new task: ";
     std::getline(std::cin, task);
-    mTasks.emplace(task);
+    mTasks.emplace(mNumOfTasks, task);
 }
 void Manager::removeTask(){
-    std::string task{};
-    task.reserve(50);
-    std::getline(std::cin, task);
-    mTasks.erase(task);
-    mNumOfTasks--;
+    // TODO add filters and functionality
+    // std::string task{};
+    // task.reserve(4);
+    // std::cout << "Enter task to mark as done: ";
+    // std::getline(std::cin, task);
+    // mTasks.erase(task);
+    // mNumOfTasks--;
 }
 
 } // namespace manager

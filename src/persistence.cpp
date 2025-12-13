@@ -11,25 +11,26 @@ Persistence::~Persistence()
 {
 }
 
-std::unordered_set<std::string> Persistence::loadTasks(){
+taskMap Persistence::loadTasks(){
     std::ifstream ifstr (FILENAME);
     if (!ifstr.is_open()){
         std::cout << "There was a problem opening the tasks file, try loading the " << FILENAME << ".bak\n";
         return {};
     }
 
-    std::unordered_set<std::string> tasks{};
+    taskMap tasks{};
     std::string line;
     
     while (getline(ifstr, line))
     {
-        tasks.emplace(line);
+        // TODO get id and task separately, then put it into the map
+        // tasks.emplace(line);
     }
     ifstr.close();
     return tasks;
 }
 
-void Persistence::saveTasks(const std::unordered_set<std::string>& tasks) {
+void Persistence::saveTasks(const taskMap& tasks) {
     std::ofstream ofstr (FILENAME);
     // fallback in case default file couldn't be opened
     if (!ofstr.is_open()){
@@ -43,7 +44,7 @@ void Persistence::saveTasks(const std::unordered_set<std::string>& tasks) {
     }
     
     for (auto task : tasks){
-        ofstr << task << std::endl;
+        ofstr << task.first << ": " << task.second << std::endl;
     }
     ofstr.close();
 }
