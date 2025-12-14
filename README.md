@@ -32,8 +32,8 @@ Before building, make sure you have:
 ### 📦 Installation
 
 Clone the repository:
-
 ```bash
 git clone https://github.com/mRuben7/CLI_todoListManager.git
 cd CLI_todoListManager
 ```
+Or download the compiled version [release](https://github.com/mRuben7/CLI_todoListManager/releases/)
