@@ -1,4 +1,5 @@
 #include "manager.h"
+#include "helper.h"
 
 namespace manager {
 
@@ -39,12 +40,17 @@ void Manager::addTask(){
 }
 void Manager::removeTask(){
     // TODO add filters and functionality
-    // std::string task{};
-    // task.reserve(4);
-    // std::cout << "Enter task to mark as done: ";
-    // std::getline(std::cin, task);
-    // mTasks.erase(task);
-    // mNumOfTasks--;
+    std::string task{};
+    task.reserve(4);
+    std::cout << "Enter task to mark as done: ";
+    std::getline(std::cin, task);
+    std::optional<u_int16_t> id = helper::getID(task);
+    if (!id.has_value()){
+        std::cout << "Please enter a valid ID to mark a task as done\n";
+        return;
+    }
+    mTasks.erase(id.value());
+    mNumOfTasks--;
 }
 
 } // namespace manager

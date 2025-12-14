@@ -1,4 +1,6 @@
 #include "persistence.h"
+#include "helper.h"
+
 #include <fstream>
 
 namespace persistence {
@@ -23,8 +25,12 @@ taskMap Persistence::loadTasks(){
     
     while (getline(ifstr, line))
     {
-        // TODO get id and task separately, then put it into the map
-        // tasks.emplace(line);
+        u_int8_t separatorPos = line.find(":");
+        std::string textID = line.substr(0, separatorPos);
+        std::optional<u_int16_t> id = helper::getID(textID);
+        if (!id.has_value()) continue;
+        std::string task = line.substr(separatorPos + 1, line.size());
+        tasks.emplace(id.value(), task);
     }
     ifstr.close();
     return tasks;
