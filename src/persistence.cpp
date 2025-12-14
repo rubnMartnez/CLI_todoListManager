@@ -1,6 +1,7 @@
 #include "persistence.h"
 
 #include <fstream>
+#include <filesystem>
 
 namespace persistence {
 
@@ -14,7 +15,7 @@ Persistence::~Persistence()
 
 taskVec Persistence::loadTasks(){
     std::ifstream ifstr (FILENAME);
-    if (!ifstr.is_open()){
+    if (std::filesystem::exists(FILENAME) && !ifstr.is_open()){
         std::cout << "There was a problem opening the tasks file, try loading the " << FILENAME << ".bak\n";
         return {};
     }
