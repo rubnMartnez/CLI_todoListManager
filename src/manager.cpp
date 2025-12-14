@@ -26,8 +26,10 @@ void Manager::listTasks() const {
         return;
     }
 
+    u_int16_t index = 1;
     for (auto task : mTasks){
-        std::cout << task.first << ": " << task.second << std::endl;
+        std::cout << index << ": " << task << std::endl;
+        index++;
     }
 }
 void Manager::addTask(){
@@ -36,20 +38,30 @@ void Manager::addTask(){
     task.reserve(50);
     std::cout << "Enter new task: ";
     std::getline(std::cin, task);
-    mTasks.emplace(mNumOfTasks, task);
+    mTasks.emplace_back(task);
 }
 void Manager::removeTask(){
-    // TODO add filters and functionality
+    if (mTasks.empty()){
+        std::cout << "There are no tasks to mark as done\n";
+        printHelp();
+        return;
+    }
+
     std::string task{};
     task.reserve(4);
     std::cout << "Enter task to mark as done: ";
     std::getline(std::cin, task);
-    std::optional<u_int16_t> id = helper::getID(task);
-    if (!id.has_value()){
-        std::cout << "Please enter a valid ID to mark a task as done\n";
+    std::optional<u_int16_t> optId = helper::getID(task);
+    if (!optId.has_value()){
+        std::cout << "Invalid ID, no task marked as done\n";
         return;
     }
-    mTasks.erase(id.value());
+    u_int16_t id = optId.value() - 1;
+    if (id >= mTasks.size()){
+        std::cout << "ID out of bounds, no task marked as done\n";
+        return;
+    }
+    mTasks.erase(mTasks.begin() + id);
     mNumOfTasks--;
 }
 

@@ -16,7 +16,7 @@ done, d      Mark a task as completed
 exit, e      Exit the program
 quit, q      Exit the program
 )";
-    taskMap mTasks{};
+    taskVec mTasks{};
     u_int32_t mNumOfTasks;
     persistence::Persistence mPersist{};
 public:

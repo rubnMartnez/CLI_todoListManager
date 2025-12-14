@@ -3,9 +3,9 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <map>
+#include <vector>
 
-using taskMap = std::map<u_int16_t, std::string>;
+using taskVec = std::vector<std::string>;
 
 namespace persistence {
     
@@ -17,8 +17,8 @@ private:
 public:
     Persistence();
     ~Persistence();
-    taskMap loadTasks();
-    void saveTasks(const taskMap& tasks); 
+    taskVec loadTasks();
+    void saveTasks(const taskVec& tasks); 
 };
 
 } // namespace persistence
