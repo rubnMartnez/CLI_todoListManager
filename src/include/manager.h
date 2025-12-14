@@ -2,6 +2,8 @@
 
 #include "persistence.h"
 
+#include <optional>
+
 namespace manager {
 class Manager
 {
@@ -19,6 +21,8 @@ quit, q      Exit the program
     taskVec mTasks{};
     u_int32_t mNumOfTasks;
     persistence::Persistence mPersist{};
+
+    std::optional<u_int16_t> getID(const std::string& text);
 public:
     Manager();
     ~Manager();

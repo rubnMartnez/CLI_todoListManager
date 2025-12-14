@@ -5,7 +5,6 @@ project(main)
 set(SOURCES src/main.cpp
     src/persistence.cpp
     src/manager.cpp
-    src/helper.cpp
 )
 
 add_executable(main ${SOURCES})

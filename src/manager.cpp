@@ -1,5 +1,6 @@
 #include "manager.h"
-#include "helper.h"
+
+#include <algorithm>
 
 namespace manager {
 
@@ -51,7 +52,7 @@ void Manager::removeTask(){
     task.reserve(4);
     std::cout << "Enter task to mark as done: ";
     std::getline(std::cin, task);
-    std::optional<u_int16_t> optId = helper::getID(task);
+    std::optional<u_int16_t> optId = getID(task);
     if (!optId.has_value()){
         std::cout << "Invalid ID, no task marked as done\n";
         return;
@@ -63,6 +64,13 @@ void Manager::removeTask(){
     }
     mTasks.erase(mTasks.begin() + id);
     mNumOfTasks--;
+}
+
+std::optional<u_int16_t> Manager::getID(const std::string& str){
+    if (str.empty()) return {};
+    if (!std::all_of(str.begin(), str.end(), [](char c){return std::isdigit(c);})) return {};
+
+    return std::stoi(str);
 }
 
 } // namespace manager
